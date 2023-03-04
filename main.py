@@ -32,7 +32,7 @@ if __name__ == '__main__':
         label=['Train accuracy', "Validation accuracy"]
     )
 
-    '''data = data_set[cnn.TEST_IMAGES][7485]
+    data = data_set[cnn.TEST_IMAGES][7485]
     predicet = cnn.predict(model, data.reshape(1, cnn.WIDTH, cnn.HEIGHT, 1))
     graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predicet))
     data = data_set[cnn.TEST_IMAGES][14]
@@ -40,8 +40,9 @@ if __name__ == '__main__':
     graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predicet))
     data = data_set[cnn.TEST_IMAGES][2497]
     predicet = cnn.predict(model, data.reshape(1, cnn.WIDTH, cnn.HEIGHT, 1))
-    graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predicet))'''
+    graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predicet))
 
+    count = 0
     while True:
         cam.display()
         if cam.isRet() == True:
@@ -51,11 +52,8 @@ if __name__ == '__main__':
             print('Prediction: ', predict)
             #graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predict))
             time.sleep(0.1)
+            count = count + 1
         if cam.isKey('q') == True:
             break
 
     cam.release()
-
-
-    
-    
