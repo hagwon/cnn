@@ -27,24 +27,6 @@ class CNN():
         return data_set
     
     def buildModel(self):
-        inputs = keras.Input(shape=(self.WIDTH, self.HEIGHT, 1))
-        x = layers.Conv2D(filters=32, kernel_size=3, activation='relu')(inputs)
-        x = layers.MaxPooling2D(pool_size=2)(x)
-
-        x = layers.Conv2D(filters=64, kernel_size=3, activation='relu')(x)
-        x = layers.MaxPooling2D(pool_size=2)(x)
-
-        x = layers.Conv2D(filters=128, kernel_size=3, activation='relu')(x)
-
-        x = layers.Flatten()(x)
-        outputs =layers.Dense(10, activation='softmax')(x)
-        model = keras.Model(inputs=inputs, outputs=outputs)
-        model.compile(
-            optimizer='rmsprop',
-            loss='sparse_categorical_crossentropy',
-            metrics=['accuracy']
-        )
-        model.summary()
 
         return model
 
@@ -53,15 +35,6 @@ class CNN():
         partial_x_train = train_images[10000:]
         y_val = train_labels[:10000]
         partial_y_train = train_labels[10000:]
-
-        history = model.fit(
-            partial_x_train,
-            partial_y_train,
-            epochs=self.epochs,
-            batch_size=self.batch_size,
-            validation_data=(x_val, y_val)
-        )
-        model.save('cnn_model.h5')
 
         return model, history
 

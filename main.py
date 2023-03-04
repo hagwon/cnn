@@ -1,14 +1,12 @@
 from cnn import CNN
 from graph import Grape
 from camera import Camera
-from xylobotSerial import ComPort
 import time
 
 if __name__ == '__main__':
-    cnn = CNN(learning_rate=0.01, epochs=1, batch_size=64)
+    cnn = CNN(learning_rate=0.01, epochs=5, batch_size=64)
     graph = Grape()
     cam = Camera(0, 136, 'mnist')
-    xylobot = ComPort()
 
     data_set = cnn.prepareData()
     model = cnn.buildModel()
@@ -44,8 +42,6 @@ if __name__ == '__main__':
     predicet = cnn.predict(model, data.reshape(1, cnn.WIDTH, cnn.HEIGHT, 1))
     graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predicet))
 
-    xylobot.open()
-    count = 0
     while True:
         cam.display()
         if cam.isRet() == True:
@@ -54,16 +50,8 @@ if __name__ == '__main__':
             predict = cnn.predict(model, data)
             print('Prediction: ', predict)
             #graph.showImage(data.reshape((cnn.WIDTH, cnn.HEIGHT,)), title='Prediect: ' + str(predict))
-            if xylobot.is_connected == True and count == 9:
-                xylobot.writePlay(predict, 0.1)
-                count = 0
-            time.sleep(0.1)
-            count = count + 1
+            time.sleep(0.03)
         if cam.isKey('q') == True:
             break
 
     cam.release()
-
-
-    
-    
